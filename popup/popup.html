@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sentry Check</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="scanhead">
+    <div class="scanhead__sweep" aria-hidden="true"></div>
+    <div class="scanhead__row">
+      <div class="brand">
+        <span class="brand__mark">◆</span>
+        <span class="brand__name">Sentry Check</span>
+      </div>
+      <div class="head__actions">
+        <button id="themeToggle" class="rescan" title="Toggle light/dark theme">◐</button>
+        <button id="rescan" class="rescan" title="Re-scan this page">⟳</button>
+      </div>
+    </div>
+    <div class="target" id="targetUrl">—</div>
+    <div class="score" id="scoreBlock">
+      <svg class="score__ring" viewBox="0 0 64 64" width="56" height="56">
+        <circle cx="32" cy="32" r="27" class="score__track" />
+        <circle cx="32" cy="32" r="27" class="score__value" id="scoreRing" />
+      </svg>
+      <div class="score__text">
+        <span id="scoreNum">--</span>
+        <label>risk score</label>
+        <span class="score__band" id="scoreBand" style="display:none;"></span>
+      </div>
+      <ul class="score__tally" id="scoreTally"></ul>
+    </div>
+  </header>
+
+  <main id="sections"></main>
+
+  <footer class="foot">
+    <span>Portfolio project — not a substitute for a full pentest.</span>
+  </footer>
+
+  <div id="consentModal" class="modal">
+    <div class="modal__box">
+      <h2>Enable external lookups?</h2>
+      <p>
+        Domain ownership, known-vulnerability, and server-location checks send
+        the site's domain / IP to third-party services (RDAP registries, NVD,
+        crt.sh, ipwho.is) to get data that isn't available on the page itself.
+        Header, cookie, TLS-basic, mixed-content, and library checks never
+        leave your machine either way.
+      </p>
+      <div class="modal__actions">
+        <button id="consentSkip" class="btn btn--ghost">Skip these checks</button>
+        <button id="consentAllow" class="btn btn--primary">Allow</button>
+      </div>
+      <p class="modal__note">You can change this later in the extension's settings.</p>
+    </div>
+  </div>
+
+  <script src="../consent.js"></script>
+  <script src="../net-checks.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
